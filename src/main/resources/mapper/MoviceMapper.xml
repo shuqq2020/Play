@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MoviceMapper" >
+    <resultMap id="MoviceResultMap" type="com.example.demo.entity.Movice" >
+        <id column="id" property="mid" jdbcType="INTEGER" />
+        <result column="name" property="moviceName" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="director" property="director" jdbcType="VARCHAR" />
+        <result column="star" property="star" jdbcType="VARCHAR" />
+        <result column="area" property="area" jdbcType="VARCHAR" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
+        <result column="definition" property="definition" jdbcType="VARCHAR" />
+        <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectTopFifteen" resultMap="MoviceResultMap">
+        select * from movice order by year desc limit 15
+    </select>
+
+    <select id="countMovices" resultType="java.lang.Integer">
+        select count(*) from movice
+    </select>
+
+    <select id="movicePlay" parameterType="java.lang.Integer" resultMap="MoviceResultMap">
+        select * from movice where id = #{mid}
+    </select>
+
+    <select id="moreMoviceLike" resultMap="MoviceResultMap">
+        select * from movice where type = #{type} and id != #{mid} order by rand() limit 10
+    </select>
+
+    <select id="searchMovice" resultMap="MoviceResultMap" parameterType="java.lang.String">
+        select * from (
+        select * from movice where 1=1
+        <if test="name != null and name != ''">
+            and name like "%"#{name}"%"
+        </if>
+        union
+        select * from movice where 1=1
+        <if test="name != null and name != ''">
+            and star like "%"#{name}"%"
+        </if>
+        union
+        select * from movice where 1=1
+        <if test="name != null and name != ''">
+            and director like "%"#{name}"%"
+        </if>) a limit #{page},5
+    </select>
+    <select id="countSearchMovice" resultType="java.lang.Integer">
+        select count(*) from (
+            select * from movice where 1=1
+            <if test="name != null and name != ''">
+                and name like "%"#{name}"%"
+            </if>
+            union
+            select * from movice where 1=1
+            <if test="name != null and name != ''">
+                and star like "%"#{name}"%"
+            </if>
+            union
+            select * from movice where 1=1
+            <if test="name != null and name != ''">
+                and director like "%"#{name}"%"
+            </if>
+        ) a
+
+    </select>
+    <select id="selectTopfifteenPage" resultMap="MoviceResultMap">
+        select * from movice order by year desc limit #{i},15
+    </select>
+
+    <select id="selectMoviceTypePage" resultMap="MoviceResultMap">
+        select * from movice where type = #{type} limit #{page},15
+    </select>
+
+    <select id="selectCollectionMovice" parameterType="java.util.List" resultMap="MoviceResultMap">
+        select * from movice where id in
+        <foreach collection="userIdList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectAll" resultMap="MoviceResultMap">
+        select * from movice
+    </select>
+</mapper>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊电影---后台登录</title>
+    <link rel="stylesheet" href="../../static/asserts/css/adminStyle.css" th:href="@{/asserts/css/adminStyle.css}">
+</head>
+<body>
+<section>
+    <!-- 背景颜色 -->
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="box">
+        <!-- 背景圆 -->
+        <div class="circle" style="--x:0"></div>
+        <div class="circle" style="--x:1"></div>
+        <div class="circle" style="--x:2"></div>
+        <div class="circle" style="--x:3"></div>
+        <div class="circle" style="--x:4"></div>
+        <!-- 登录框 -->
+        <div class="container">
+            <div class="form">
+                <h2 style="font-family: FZShuTi">熊熊电影后台</h2>
+                <form action="/admin_index" method="get">
+                    <div class="inputBox">
+                        <input type="text" id="username" name="username" placeholder="UserName">
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" id="password" name="password" placeholder="PassWord">
+
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" value="Login" >
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>

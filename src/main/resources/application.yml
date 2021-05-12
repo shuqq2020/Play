@@ -1,0 +1,12 @@
+mybatis:
+  type-aliases-package:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/play?useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

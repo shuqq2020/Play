@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CollectionMapper" >
+    <resultMap id="LikeResultMap" type="com.example.demo.entity.Collection" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="mid" property="mid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <insert id="likeMovice" >
+        insert into collection (username, mid) values (#{username}, #{mid});
+    </insert>
+
+    <delete id="unLikeMovice">
+        delete from collection where username = #{username} and mid = #{mid}
+    </delete>
+
+    <select id="findLike" resultMap="LikeResultMap">
+        select * from collection where username = #{username} and mid = #{mid}
+    </select>
+
+    <select id="selectCollection" resultMap="LikeResultMap">
+        select * from collection where username = #{loginUser}
+    </select>
+</mapper>

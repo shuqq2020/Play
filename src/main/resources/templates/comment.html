@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊电影---留言板</title>
+    <link rel="stylesheet" href="../static/asserts/css/common.css" th:href="@{/asserts/css/common.css}">
+    <link rel="stylesheet" href="../static/asserts/css/comment.css" th:href="@{/asserts/css/comment.css}">
+    <script src="webjars/jquery/3.3.1/jquery.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+</head>
+<body>
+<!--引入头部模块-->
+<div th:replace="~{index::topBar}"></div>
+<div class="main">
+    <label>评论:</label>
+    <textarea class="form-control" name="content" id="content" cols="150" rows="5" placeholder="可输入255个汉字"></textarea>
+    <button id="pushComment" class="main-input" type="button">发表</button>
+</div>
+<hr>
+<div class="comment">
+    <ul class="comment-ul" th:each="comment:${session.comments}">
+        <li class="comment-ul-li">
+            <div class="comment-ul-li-div">
+                    <p class="p1">[[${comment.username}]]:</p>
+                    <p class="p2">[[${comment.content}]]</p>
+                    <p format class="p3">[[${comment.time}]]</p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<!--引入底部模块-->
+<div th:replace="~{index::footerBar}"> </div></body>
+<script type="text/javascript" src="../static/asserts/js/search.js" th:src="@{/asserts/js/search.js}" ></script>
+<script type="text/javascript" src="../static/asserts/js/pushComment.js" th:src="@{/asserts/js/pushComment.js}" ></script>
+</html>

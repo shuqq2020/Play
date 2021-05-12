@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊电影---查询结果</title>
+    <link rel="stylesheet" href="../static/asserts/css/common.css" th:href="@{/asserts/css/common.css}">
+    <link rel="stylesheet" href="../static/asserts/css/search.css" th:href="@{/asserts/css/search.css}">
+    <link rel="stylesheet" href="../static/asserts/css/pagination.css" th:href="@{/asserts/css/pagination.css}">
+    <script src="webjars/jquery/3.3.1/jquery.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+</head>
+<body>
+<!--引入头部模块-->
+<div th:replace="~{index::topBar}"></div>
+
+<div class="search-main">
+    <div class="search-result">
+        <p>搜索到与"</p>
+        <p style="color: #2196f3;">[[${session.searchName}]]</p>
+        <p>"相关的"</p>
+        <p style="color: #2196f3;" >[[${session.countSearchMovice}]]</p>
+        <p>"条结果</p>
+    </div>
+    <div class="search-movice">
+        <ul>
+            <li th:each="searchMovice:${session.SearchMoviceList}" >
+                <div class="search-movice-cover">
+                    <a href="movicePlay.html" th:href="'/movicePlay/id/' + ${searchMovice.mid} + '/type/' + ${searchMovice.type}">
+                        <img src="../static/asserts/images/夺命狙击2.jpg" th:src="'/asserts/images/' + ${searchMovice.moviceName} + '.jpg'">
+                    </a>
+
+                </div>
+                <div class="search-movice-information">
+                    <h1 th:text="${searchMovice.moviceName}">夺命狙击2</h1>
+                    <p class="p1" th:text="'导演:' + ${searchMovice.director}">导演:赵勇</p>
+                    <p class="p2" th:text="'主演:' + ${searchMovice.star}">主演:袁福福 熊玉婷 张皓承 Haocheng Zhang 毕雪 Behati 杜玉明 姚安濂</p>
+                    <p class="p3" th:text="'简介:' + ${searchMovice.introduction}">简介:抗战时期，新四军战士杨浩天在带领掉队的战友——卫生员豆花儿、士兵小虎、冯四五一等人归队时，与被日军追击的国军情报员秦瑜在迷云岭相遇。两方人马，在猎户女儿三喜的帮助下，从敌对到合作，共同抵御天险，抗击日军。众人各自利用所长，成功阻止了日军追踪拦截的计划，为情报的顺利送达争取到了宝贵的时间。最终杨浩天回归队伍，三喜加入了新四军，继续战斗在中国的革命事业的第一线。</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--分页-->
+    <div class="paging">
+        <ul class="pagination">
+            <li>
+                <a href="javascript:void(0);" th:href="'/search/page/' + ${session.page - 1} + '/name/' + ${session.searchName}">
+                    <span>&laquo;</span>
+                </a>
+            </li>
+            <li><a href="#" th:text="${session.page - 1}" th:if="${(session.page - 1) > 0}" >1</a></li>
+            <li><a href="#" th:text="${session.page}" style="background-color:#999;">1</a></li>
+            <li><a href="#" th:text="${session.page + 1}" th:if="${session.page + 1} <= ${session.countSearchMovice / 5}" >1</a></li>
+            <li>
+                <a href="javascript:void(0);" th:href="'/search/page/' + ${session.page + 1} + '/name/' + ${session.searchName}">
+                    <span>&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<!--引入底部模块-->
+<div th:replace="~{index::footerBar}"> </div>
+</body>
+<script type="text/javascript" src="../static/asserts/js/search.js" th:src="@{/asserts/js/search.js}" ></script>
+</html>

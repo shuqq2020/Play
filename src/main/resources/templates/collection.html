@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊电影---个人收藏</title>
+    <link rel="stylesheet" href="../static/asserts/css/common.css" th:href="@{/asserts/css/common.css}">
+    <link rel="stylesheet" href="../static/asserts/css/collection.css" th:href="@{/asserts/css/collection.css}">
+    <script src="webjars/jquery/3.3.1/jquery.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+</head>
+<body>
+<!--引入头部模块-->
+<div th:replace="~{index::topBar}"></div>
+    <div class="head">
+        <h1>[[${session.loginUser}]]</h1>
+        <p>的收藏列表</p>
+
+        <p class="right"><a href="#" th:href="${session.collectionPage - 1} > 0 ? '/collectionMovice/collectionPage/' + ${session.collectionPage - 1} : 'javascript:void(0);'">上一页</a></p>
+        <p class="right"><a href="#" th:href="${session.collectionPage + 1} <= ${(session.collectionCount + 15)/ 15} ? '/collectionMovice/collectionPage/' + ${session.collectionPage + 1} : 'javascript:void(0);'">下一页</a></p>
+    </div>
+    <div class="mainCollection">
+        <div class="mainShow">
+            <ul class="all">
+                <li class="mainMovice" th:each="moviceList:${session.collectionMoviceList}">
+                    <a href="movicePlay.html"  th:href="'/movicePlay/id/' + ${moviceList.mid} + '/type/' + ${moviceList.type}"  >
+                        <div class="cover">
+                            <img src="../static/asserts/images/夺命狙击2.jpg" th:src="'/asserts/images/' + ${moviceList.moviceName} + '.jpg'" alt="">
+                        </div>
+                    </a>
+                    <div class="moviceP" th:if="${not #strings.isEmpty(moviceList)}">
+                        <p class="p1" th:text="${moviceList.moviceName}">夺命狙击2</p>
+                        <p class="p2" th:text="${moviceList.star}">袁福福 熊玉婷 张皓承 Haocheng Zhang 毕雪 Behati 杜玉明 姚安濂</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+<!--引入底部模块-->
+<div th:replace="~{index::footerBar}"> </div>
+</body>
+<script type="text/javascript" src="../static/asserts/js/search.js" th:src="@{/asserts/js/search.js}" ></script>
+</html>

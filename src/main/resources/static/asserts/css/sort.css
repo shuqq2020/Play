@@ -1,0 +1,131 @@
+.sortNav {
+    margin-top: -15px;
+    box-shadow: 0px 0px 4px #999;
+    height: 50px;
+}
+
+.sort-ul {
+    list-style: none;
+
+}
+
+.sort-ul-li {
+    display: inline-block;
+    margin: 0px;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.sort-ul-li-active {
+    display: inline-block;
+    margin: 0px;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #d5d5d5;
+}
+
+.sort-ul-li-active a {
+    text-decoration: none;
+    color: #2196f3;
+}
+
+
+.sort-ul-li-first {
+    display: inline-block;
+    margin-left: 50px;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.sort-ul-li:hover {
+    background-color: #d5d5d5;
+}
+
+.sort-ul-li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.sort-ul-li a:hover {
+    color: #2196f3;
+}
+
+.sortMain {
+    width: 1536px;
+    height: 1170px;
+    /*background-color: #337ab7;*/
+    box-shadow: 0px 0px 4px #000;
+}
+
+
+.moivces {
+    position: absolute;
+    right: 120px;
+    color: #999;
+}
+
+.mainShow {
+    position: relative;
+    width: 1336px;
+    height: 1070px;
+    left: 100px;
+    box-shadow: 0px 1px 4px #999;
+}
+
+.mainShow .all {
+    position: relative;
+    top: 40px;
+    margin: 0px;
+    list-style: none;
+
+}
+
+.mainShow .all .mainMovice {
+    float: left;
+    margin-left: 32px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 212px;
+    height: 320px;
+    /*background-color: #fee8b8;*/
+    overflow:hidden;
+    /*box-shadow: 0px 0px 10px #999 ;*/
+}
+
+.mainShow .all .mainMovice .cover {
+    margin: 16px 16px;
+    width: 180px;
+    height: 250px;
+}
+
+.mainShow .all .mainMovice .cover img {
+    width: 100%;
+    height: 100%;
+}
+
+.mainShow .all .mainMovice .moviceP {
+    width: 180px;
+}
+
+.mainShow .all .mainMovice .p1 {
+    font-size: 17px;
+    margin-top: -10px;
+    margin-left: 16px;
+    font-weight: bolder;
+}
+.mainShow .all .mainMovice .p2 {
+    margin-top: -10px;
+    margin-left: 16px;
+    padding-bottom: 2px;
+    font-size: 13px;
+}
+
+
+

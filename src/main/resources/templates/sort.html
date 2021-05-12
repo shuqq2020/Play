@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊电影---电影分类</title>
+    <link rel="stylesheet" href="../static/asserts/css/common.css" th:href="@{/asserts/css/common.css}">
+    <link rel="stylesheet" href="../static/asserts/css/sort.css" th:href="@{/asserts/css/sort.css}">
+    <link rel="stylesheet" href="../static/asserts/css/pagination.css" th:href="@{/asserts/css/pagination.css}">
+    <script src="webjars/jquery/3.3.1/jquery.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+</head>
+<body>
+<!--引入头部模块-->
+<div th:replace="~{index::topBar}"></div>
+<div class="sortNav">
+    <ul class="sort-ul">
+        <li class="sort-ul-li-first">分类</li>
+        <li th:class="${session.type == null} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1">全部影片</a></li>
+        <li th:class="${session.type eq '动作'} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1/type/动作">动作片</a></li>
+        <li th:class="${session.type eq '喜剧'} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1/type/喜剧">喜剧片</a></li>
+        <li th:class="${session.type eq '爱情'} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1/type/爱情">爱情片</a></li>
+        <li th:class="${session.type eq '科幻'} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1/type/科幻">科幻片</a></li>
+        <li th:class="${session.type eq '恐怖'} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1/type/恐怖">恐怖片</a></li>
+        <li th:class="${session.type eq '剧情'} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1/type/剧情">剧情片</a></li>
+        <li th:class="${session.type eq '战争'} ? sort-ul-li-active : sort-ul-li" class="sort-ul-li"><a href="/sort/page/1/type/战争">战争片</a></li>
+    </ul>
+</div>
+
+<div class="sortMain">
+    <div class="mainShow">
+        <ul class="all">
+            <li class="mainMovice" th:each="moviceList:${session.moviceList}">
+                <a href="movicePlay.html"  th:href="'/movicePlay/id/' + ${moviceList.mid} + '/type/' + ${moviceList.type}"  >
+                    <div class="cover">
+                        <img src="../static/asserts/images/夺命狙击2.jpg" th:src="'/asserts/images/' + ${moviceList.moviceName} + '.jpg'" alt="">
+                    </div>
+                </a>
+                <div class="moviceP" th:if="${not #strings.isEmpty(moviceList)}">
+                    <p class="p1" th:text="${moviceList.moviceName}">夺命狙击2</p>
+                    <p class="p2" th:text="${moviceList.star}">袁福福 熊玉婷 张皓承 Haocheng Zhang 毕雪 Behati 杜玉明 姚安濂</p>
+                </div>
+
+            </li>
+        </ul>
+
+    </div>
+    <div class="paging">
+        <ul class="pagination">
+            <li>
+                <a href="javascript:void(0);" th:href="${session.type} == null ? '/sort/page/' + ${session.page - 1} : '/sort/page/' + ${session.page - 1} + '/type/' + ${session.type}">
+                    <span>&laquo;</span>
+                </a>
+            </li>
+            <li><a href="#" th:href="${session.type} == null ? '/sort/page/' + ${session.page - 1} : '/sort/page/' + ${session.page - 1} + 'type' + ${session.type}" th:text="${session.page - 1}" th:if="${(session.page - 1) > 0}" >1</a></li>
+            <li><a href="#" th:href="${session.type} == null ? '/sort/page/' + ${session.page} :  '/sort/page/' + ${session.page} + 'type' + ${session.type}" th:text="${session.page}" style="background-color:#999;">1</a></li>
+            <li><a href="#" th:href="${session.type} == null ? '/sort/page/' + ${session.page + 1} :  '/sort/page/' + ${session.page + 1} + 'type' + ${session.type}" th:text="${session.page + 1}" th:if="${session.page + 1} <= ${(session.countSearchMovice + 15) / 15}" >1</a></li>
+            <li>
+                <a href="javascript:void(0);" th:href="${session.type} == null ? '/sort/page/' + ${session.page + 1} : '/sort/page/' + ${session.page + 1} + '/type/' + ${session.type}">
+                    <span>&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--引入底部模块-->
+<div th:replace="~{index::footerBar}"> </div>
+</body>
+<script type="text/javascript" src="../static/asserts/js/search.js" th:src="@{/asserts/js/search.js}" ></script>
+<script src="webjars/jquery/3.3.1/jquery.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+</html>

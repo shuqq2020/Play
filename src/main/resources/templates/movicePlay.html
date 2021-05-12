@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊电影---视频播放</title>
+    <link rel="stylesheet" href="../static/asserts/css/common.css" th:href="@{/asserts/css/common.css}">
+    <link rel="stylesheet" href="../static/asserts/css/movicePlay.css" th:href="@{/asserts/css/movicePlay.css}">
+    <script src="webjars/jquery/3.3.1/jquery.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            $("#btn-button").on('click',function (event) {
+                $.ajax({
+                    type:"POST",
+                    url:"/movicePlay/likeMovice",
+                    // dataType:'json',
+                    async: false,
+                    success:function(data) {
+                        if (data) {
+                            alert("操作成功")
+                            // window.location.href="";
+                            window.location.reload();
+                        }else {
+                            alert("操作失败");
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+<!--引入头部模块-->
+<div th:replace="~{index::topBar}"></div>
+
+<div class="main">
+    <div class="movice-play-frame">
+        <iframe height="512" width="1024" allowfullscreen="true" frameborder="0" src="https://jx.cbi88.com/?url=https://mv.cbi88.com/20210301/Mnlhlqgy/index.m3u8" th:src="${session.movice.url}" scrolling="no">
+            <p>熊熊正在拼命加载...如长时间未加载成功请联系管理员</p>
+        </iframe>
+        <div class="movice-information">
+            <h1 class="movice-title" th:text="${session.movice.moviceName}">夺命狙击2</h1>
+            <div class="btn" >
+                    <button type="button" id="btn-button" th:text="${session.flag} ? '已收藏' : '收藏'" th:style="${session.flag} ? 'background-color: #2196f3;' : ''" >收藏</button>
+            </div>
+            <p class="p1" th:text="'导演:' + ${session.movice.director}">导演:赵勇</p>
+            <p class="p2" th:text="'主演:' + ${session.movice.star}">主演:袁福福 熊玉婷 张皓承 Haocheng Zhang 毕雪 Behati 杜玉明 姚安濂</p>
+            <p th:text="'简介:' + ${session.movice.introduction}">简介:抗战时期，新四军战士杨浩天在带领掉队的战友——卫生员豆花儿、士兵小虎、冯四五一等人归队时，与被日军追击的国军情报员秦瑜在迷云岭相遇。两方人马，在猎户女儿三喜的帮助下，从敌对到合作，共同抵御天险，抗击日军。众人各自利用所长，成功阻止了日军追踪拦截的计划，为情报的顺利送达争取到了宝贵的时间。最终杨浩天回归队伍，三喜加入了新四军，继续战斗在中国的革命事业的第一线。</p>
+        </div>
+    </div>
+</div>
+
+<!--相关内容-->
+<div class="like">
+    <h1>更多热映</h1>
+    <div class="likeMovice">
+        <ul class="likeMovice-ul">
+            <li class="likeMovice-ul-li" th:each="moviceLike:${session.moviceLikeList}">
+                <a href="movicePlay.html" th:href="'/movicePlay/id/' + ${moviceLike.mid} + '/type/' + ${moviceLike.type}">
+                    <div class="likeMovice-ul-li-div1">
+                        <img src="../static/asserts/images/夺命狙击2.jpg" th:src="'/asserts/images/' + ${moviceLike.moviceName} + '.jpg'" alt="">
+                    </div>
+                </a>
+                <div class="likeMovice-ul-li-div2" th:if="${not #strings.isEmpty(moviceLike)}">
+                    <p class="p1" th:text="${moviceLike.moviceName}">夺命狙击2</p>
+                    <p class="p2" th:text="${moviceLike.star}">袁福福 熊玉婷 张皓承 Haocheng Zhang 毕雪 Behati 杜玉明 姚安濂</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--引入底部模块-->
+<div th:replace="~{index::footerBar}"> </div>
+</body>
+<script type="text/javascript" src="../static/asserts/js/search.js" th:src="@{/asserts/js/search.js}" ></script>
+</html>
